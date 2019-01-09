@@ -1,0 +1,38 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="avatar" src="assets/images/logo.png" width="150px" />
+            <h1>AG-GIGI (PVT) LTD.</h1>
+            <div [ngClass]="messageClass">
+                {{message}}
+            </div>
+            <form [formGroup]="singupForm" (submit)="onSingUpSubmit()">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-underline input-lg" id="username" formControlName="username" placeholder="Full Name">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control input-underline input-lg" id="email" formControlName="email" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control input-underline input-lg" id="password" formControlName="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <select type="text" class="form-control input-underline input-lg" id="userRole" formControlName="userRole" placeholder="User Role">
+                            <option value="admin">Admin</option>
+                            <option value="merchandiser">Merchandiser</option>
+                            <option value="production">Production</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <a class="btn rounded-btn" [routerLink]="['/dashboard']"> Register </a>&nbsp; -->
+                <input class="btn rounded-btn" type="submit" value="Register" >&nbsp;
+                <p style="margin-top:4%">Already have an account ? <a class="" [routerLink]="['/login']"> Sign in </a> </p>
+
+
+            </form>
+        </div>
+    </div>
+</div>

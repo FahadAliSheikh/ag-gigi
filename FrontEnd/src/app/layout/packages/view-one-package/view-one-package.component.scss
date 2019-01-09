@@ -1,0 +1,78 @@
+$background-color: #548e89;
+
+.avatar{
+  border-radius: 0px;
+  // float: right;
+  height: 60px;
+  width: 50px;
+}
+.title{
+  display: inline-block;
+  font-weight: 600;
+  font-size: 30px;
+  margin: 0px 0px 20px 20px;
+  color: $background-color;
+}
+table, td, th {    
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.tabletitle{
+  background-color: $background-color;
+  color: white;
+}
+.datafield{
+  background-color: #f4f4f4
+}
+.tabletitleCenter{
+  background-color: $background-color;
+  color: white;
+  text-align: center;
+}
+.datatitlefield{
+  background-color: #d8d8d8;
+  text-align: left;
+}
+.datatitlefieldcenter{
+  background-color: #d8d8d8;
+  text-align: center;
+}
+.card-footer{
+  text-align: center;
+}
+th{
+  font-size: 16px;
+}
+
+#print{
+  background-color: $background-color;
+color: white;
+    position: fixed;
+    bottom: 14%;
+    right: 12px;
+}
+#image {
+  background-color: $background-color;
+color: white;
+  position: fixed;
+  bottom: 24%;
+  right: 12px;
+}
+#delete{
+  background-color: rgb(255, 101, 101);
+color: white;
+    position: fixed;
+    bottom: 4%;
+    right: 12px;
+}
+#edit {
+  background-color: $background-color;
+color: white;
+  position: fixed;
+  bottom: 34%;
+  right: 12px;
+}
+.right{
+  float: right;
+}

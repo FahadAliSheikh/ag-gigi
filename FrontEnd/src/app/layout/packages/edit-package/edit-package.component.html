@@ -1,0 +1,862 @@
+<div *ngIf='loading'>
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+<div *ngIf='!loading'>
+  <div class="card text-center offset-1" id="card">
+    <div class="card-body">
+      <h3 class="card-title ">Edit {{package.programme_name}} package</h3>
+      <h6 class="card-subtitle mb-2 text-muted">Use this form to edit a package</h6>
+      <div [ngClass]="messageClass">
+        {{message}}
+      </div>
+      <form [formGroup]='addPackageInfo'>
+        <mat-horizontal-stepper [linear]="true" #stepper>
+          <mat-step [stepControl]="addPackageInfo">
+
+            <ng-template matStepLabel>
+              Customer & InHouse
+            </ng-template>
+            <br>
+            <div class="row">
+              <!-- <div class="col-sm-6">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Merchandiser</mat-label>
+                    <mat-select matInput placeholder="Merchandiser Person Full Name" id="merchandiser" name="merchandiser"
+                      formControlName="merchandiser">
+                      <mat-option *ngFor='let merchandiser of merchandisersArray' [value]='merchandiser'>{{merchandiser.username}}</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>person</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <!-- <div class="col-sm-6 ">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Production</mat-label>
+                    <mat-select matInput placeholder="Production Person Full Name" id="production" name="production"
+                      formControlName="production">
+                      <mat-option *ngFor='let production of productionsArray' [value]='production'>{{production.username}}</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>person</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <div class="col-sm-4 ">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Program ID</mat-label>
+                    <input matInput placeholder="" id="programme_id" name="programme_id" formControlName="programme_id"
+                      autocomplete="off">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4 ">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Program Name</mat-label>
+                    <input matInput placeholder="" id="programme_name" name="programme_name" formControlName="programme_name"
+                      autocomplete="off">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4 ">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Artwork Code</mat-label>
+                    <input matInput placeholder="" id="artwork_code" name="artwork_code" formControlName="artwork_code"
+                      autocomplete="off">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="full-width">
+
+                  <!-- <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Choose a user" [matAutocomplete]="auto" formControlName='userInput'>
+                    </mat-form-field> -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>Company</mat-label>
+                    <input matInput [matAutocomplete]="companyauto" placeholder="Search" id="company_name" name="company_name"
+                      formControlName="company_name" autocomplete="off">
+                    <mat-error>Company is <strong>Required!!</strong></mat-error>
+                    <button id="add_button" matTooltip="Add New Company" matTooltipPosition="right" (mousedown)="openAddCompanyDialog()"
+                      mat-icon-button matSuffix>
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <mat-autocomplete autoActiveFirstOption #companyauto="matAutocomplete" [displayWith]="displayCompanies"
+                      (optionSelected)="selectedCompany($event)">
+                      <mat-option *ngIf='load'>
+                        <span class="spinner">
+                          <span class="bounce1"></span>
+                          <span class="bounce2"></span>
+                          <span class="bounce3"></span>
+                        </span>
+                      </mat-option>
+                      <span *ngIf='!load'>
+                        <mat-option *ngIf='noCompanyFound'>No Company Found</mat-option>
+                        <mat-option *ngFor="let company of companies" [value]="company" (onSelectionChange)="onConpanyChange()">
+                          <span [innerHtml]="company.company_name |titlecase|highlight : companyFieldValue"></span>
+                          <small *ngIf="company.company_address!=''"> | {{company.company_address}}</small>
+                          <small *ngIf="company.company_address!=''"> | {{company.company_telephone}}</small>
+                        </mat-option>
+                      </span>
+                    </mat-autocomplete>
+
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-12 " [ngClass]="isCompanySelected ? 'show' : 'hide'">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Buyer</mat-label>
+                    <input matInput [matAutocomplete]="buyerauto" placeholder="Search" id="buyer_name" name="buyer_name"
+                      formControlName='buyer_name' autocomplete="off">
+                    <mat-error>Buyer is <strong>Required!!</strong></mat-error>
+                    <button id="add_button" matTooltip="Add New Buyer" matTooltipPosition="left" (click)="openAddBuyerDialog()"
+                      mat-icon-button matSuffix>
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <mat-autocomplete autoActiveFirstOption #buyerauto="matAutocomplete" [displayWith]="displayBuyers"
+                      (optionSelected)="selectedBuyer($event)">
+                      <mat-option *ngIf='load'>
+                        <span class="spinner">
+                          <span class="bounce1"></span>
+                          <span class="bounce2"></span>
+                          <span class="bounce3"></span>
+                        </span>
+                      </mat-option>
+                      <span *ngIf='!load'>
+                        <mat-option *ngIf='noBuyerFound'>No Buyer Found</mat-option>
+                        <mat-option *ngFor="let option of buyers" [value]="option" (onSelectionChange)="onBuyerChange()">
+                          <span [innerHtml]="option.buyer_name |titlecase|highlight : buyerFiledValue"></span>
+                        </mat-option>
+                      </span>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-12" [ngClass]="isBuyerSelected ? 'show' : 'hide'">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Concerned Person</mat-label>
+                    <input matInput #concerned [matAutocomplete]="concernedauto" type="text" placeholder="Search" id="concerned_person"
+                      name="concerned_person" formControlName="concerned_person" autocomplete="off">
+                    <mat-error>Concerned Person is <strong>Required!!</strong></mat-error>
+                    <button id="add_button" matTooltip="Add New Concerned Person" matTooltipPosition="right" (click)="openAddConcernedPersonDialog()"
+                      mat-icon-button matSuffix>
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <mat-autocomplete autoActiveFirstOption #concernedauto="matAutocomplete" [displayWith]="displayPersons"
+                      (optionSelected)="selectedConcerned($event)">
+                      <mat-option *ngIf='load'>
+                        <span class="spinner">
+                          <span class="bounce1"></span>
+                          <span class="bounce2"></span>
+                          <span class="bounce3"></span>
+                        </span>
+                      </mat-option>
+                      <span *ngIf='!load'>
+                        <mat-option *ngIf='noConcernedFound'>No Concerned Person Found</mat-option>
+                        <mat-option *ngFor="let option of concernedPersons" [value]="option">
+                          <span [innerHtml]="option.concerned_person |titlecase|highlight : concernedFieldValue"></span>
+                          <small *ngIf="option.concerned_person_email !=''">| {{option.concerned_person_email |
+                            titlecase}}</small>
+                          <small *ngIf="option.concerned_person_phone !=''">| {{option.concerned_person_phone |
+                            titlecase}}</small>
+                        </mat-option>
+                      </span>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <br>
+            <button id="next" matStepperNext mat-fab>
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup">
+
+            <ng-template matStepLabel>Product</ng-template>
+            <br>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    1. Basic Information
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-sm-6 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Package Format</mat-label>
+                        <mat-select placeholder="" aria-label="Number" matInput formControlName="package_format">
+                          <mat-option *ngFor="let format of allPackageFormats " [value]="format">
+                            {{format.type| titlecase}}
+                          </mat-option>
+                        </mat-select>
+
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 ">
+                    <!-- <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Quantity</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="quantity" name="quantity"
+                          formControlName="quantity" autocomplete="off">
+                      </mat-form-field>
+                    </div> -->
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="full-width">
+                      <mat-form-field>
+                        <input matInput placeholder="" value="{{fileName}}" class="example-right-align" disabled>
+                        <span matPrefix>
+                          <button mat-raised-button matTooltip="Upload Product Image" aria-label="" color="primary"
+                            onclick="document.getElementById('product_image').click()">
+                            <mat-icon>attach_file</mat-icon>
+                          </button>
+                        </span>
+                      </mat-form-field>
+                      <input class="custom-file-input" style="display: none" id="product_image" placeholder="Product Image"
+                        type="file" (change)="onFileChanged($event)" id="product_image" name="product_image"
+                        autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    2. Flat Size
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-sm-3 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Length</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="flat_length" name="flat_length"
+                          formControlName="flat_length" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Width</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="flat_width" name="flat_width"
+                          formControlName="flat_width" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Trim Size</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="flat_trim" name="flat_trim"
+                          formControlName="flat_trim" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Gutter Size</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="flat_gutter" name="flat_gutter"
+                          formControlName="flat_gutter" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    3. Carton Size
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-sm-6 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Length</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="carton_length" name="carton_length"
+                          formControlName="carton_length" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Width</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="carton_width" name="carton_width"
+                          formControlName="carton_width" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Height</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="carton_height" name="carton_height"
+                          formControlName="carton_height" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Flap Size</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="carton_flap" name="carton_flap"
+                          formControlName="carton_flap" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 ">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Zay Size</mat-label>
+                        <input matInput min='0' type="number" placeholder="" id="carton_zay" name="carton_zay"
+                          formControlName="carton_zay" autocomplete="off">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    4. Colors
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h6 class="card-subtitle mb-2 text-muted">Front</h6>
+                  </div>
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-sm-5">
+                    <h6 class="card-subtitle mb-2 text-muted">Back</h6>
+                  </div>
+                  <div class="col-sm-6  full-width ">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Process Colors</mat-label>
+                      <mat-select (selectionChange)="addFPColor($event)" multiple formControlName="front_process_colors"
+                        name="front_process_colors">
+                        <mat-option *ngFor="let color of processColors" [value]="color">
+                          {{color}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6  full-width">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Process Colors</mat-label>
+                      <mat-select (selectionChange)="addBPColor($event)" multiple formControlName="back_process_colors"
+                        name="back_process_colors">
+                        <mat-option *ngFor="let color of processColors" [value]="color">
+                          {{color}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6  full-width">
+                    <mat-form-field class="example-chip-list" appearance="outline">
+                      <mat-label>Spot Colors</mat-label>
+                      <mat-chip-list #fslist>
+                        <mat-chip *ngFor="let fsColor of frontSpot" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeFSColor(fsColor)">
+                          {{fsColor}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add Spot Color..." #fSColorInput formControlName="front_spot_colors"
+                          [matChipInputFor]="fslist" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addFSColor($event)">
+                      </mat-chip-list>
+                      <mat-hint style="color:red">{{fshint}}</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6  full-width">
+                    <mat-form-field class="example-chip-list" appearance="outline">
+                      <mat-label>Spot Colors</mat-label>
+                      <mat-chip-list #bslist>
+                        <mat-chip *ngFor="let bsColor of backSpot" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeBSColor(bsColor)">
+                          {{bsColor}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add Spot Color..." #bSColorInput formControlName="back_spot_colors"
+                          [matChipInputFor]="bslist" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addBSColor($event)">
+                      </mat-chip-list>
+                      <mat-hint style="color:red">{{bshint}}</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Imprint/Variable</mat-label>
+                        <mat-select placeholder="--type--" id="imprint" name="imprint" formControlName="imprint">
+                          <mat-option value="yes">Yes</mat-option>
+                          <mat-option value="no">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Bar Code</mat-label>
+                        <mat-select placeholder="--type--" id="barcode" name="barcode" formControlName="barcode">
+                          <mat-option *ngFor="let barCode of allBarCodes" [value]="barCode"> {{barCode.type}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-12  full-width">
+                    <mat-form-field class="example-chip-list" appearance="outline">
+                      <mat-label>Variable Colors</mat-label>
+                      <mat-chip-list #vlist>
+                        <mat-chip *ngFor="let varCol of variableColors" [selectable]="selectable" [removable]="removable"
+                          (removed)="removeVariableColor(varCol)">
+                          {{varCol}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add variable Color..." #vColorInput formControlName="variable_colors"
+                          [matChipInputFor]="vlist" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addVariableColor($event)">
+                      </mat-chip-list>
+                      <mat-hint style="color:red">{{vhint}}</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    5. Coating
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h6 class="card-subtitle mb-2 text-muted">Front</h6>
+                  </div>
+                  <mat-divider [vertical]="true"></mat-divider>
+                  <div class="col-sm-5">
+                    <h6 class="card-subtitle mb-2 text-muted">Back</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Front Coating</mat-label>
+                        <mat-select id="front_coating" name="front_coating" formControlName="front_coating" multiple>
+                          <mat-option *ngFor="let frontCoating of allCoatings" [value]="frontCoating._id">{{frontCoating.type
+                            | titlecase}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Back Coating</mat-label>
+                        <mat-select id="back_coating" name="back_coating" formControlName="back_coating" multiple>
+                          <mat-option *ngFor="let backCoating of allCoatings" [value]="backCoating._id">{{backCoating.type
+                            | titlecase}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    6. Finishing
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Cut Type</mat-label>
+                        <mat-select placeholder="--type--" id="cut_type" name="cut_type" formControlName="cut_type"
+                          multiple>
+                          <mat-option *ngFor="let cutType of allCuts" [value]="cutType._id">{{cutType.type}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Secondary Prints</mat-label>
+                        <mat-select id="secondary_print" name="secondary_print" formControlName="secondary_print"
+                          multiple>
+                          <mat-option *ngFor="let secondaryPrint of allSecondryPrints" [value]="secondaryPrint._id">{{secondaryPrint.type
+                            | titlecase}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="" [ngClass]="punchStatus ? 'col-sm-4' : 'col-sm-8'">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Required Punch</mat-label>
+                        <mat-select placeholder="--type--" id="punch_required" (selectionChange)="punchRequired($event)"
+                          name="punch_required" formControlName="punch_required">
+                          <mat-option value='yes'>Yes</mat-option>
+                          <mat-option value='no'>No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div *ngIf='punchRequiredd' class="col-sm-4">
+                    <div class="full-width" appearance="outline">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Punch Diameter</mat-label>
+                        <input matInput placeholder="" min="0" type="number" id="punch_diameter" name="punch_diameter"
+                          formControlName="punch_diameter">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="" [ngClass]="threadStatus ? 'col-sm-4' : 'col-sm-12'">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Required Thread</mat-label>
+                        <mat-select placeholder="--type--" (selectionChange)="threadRequired($event)" id="thread_required"
+                          name="thread_required" formControlName="thread_required" value="{{package?.product?.finishing?.thread_required }}">
+                          <mat-option value="yes">Yes</mat-option>
+                          <mat-option value="no">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div *ngIf="threadRequiredd" class="col-sm-4">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Thread Type</mat-label>
+                        <mat-select [(value)]="selectedThreadType" placeholder="--type--" id="thread_type" name="thread_type"
+                          formControlName="thread_type">
+                          <mat-option *ngFor='let threadType of allThreads' [value]="threadType">{{threadType.type|
+                            titlecase}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div *ngIf="threadRequiredd" class="col-sm-4">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Thread Length</mat-label>
+                        <input matInput placeholder="" min="0" type="number" id="thread_length" name="thread_length"
+                          formControlName="thread_length">
+                        <span class="unit" matSuffix>inch</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="full-width" appearance="outline">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Pasting</mat-label>
+                        <mat-select placeholder="--type--" id="pasting" name="pasting" formControlName="pasting"
+                          multiple>
+                          <mat-option *ngFor='let common_pasting of allPastings' [value]="common_pasting._id">{{common_pasting.type|
+                            titlecase}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="full-width">
+                      <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Special Requirements</mat-label>
+                        <!-- <input type="text" placeholder="" matInput formControlName="special_requirements"
+                            [matAutocomplete]="special_req">
+                          <mat-autocomplete #special_req="matAutocomplete"> -->
+                        <mat-select placeholder="--type--" id="special_requirements" name="special_requirements"
+                          formControlName="special_requirements" multiple>
+
+                          <mat-option *ngFor="let special_requirements of allSpecialReqs " [value]="special_requirements._id">
+                            {{special_requirements.type | titlecase}}
+                          </mat-option>
+                        </mat-select>
+                        <!-- </mat-autocomplete> -->
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Required Folding</mat-label>
+                        <mat-select placeholder="--type--" id="folding" name="folding" formControlName="folding">
+                          <mat-option *ngFor='let folding of allFoldings' [value]="folding">{{folding.value|
+                            titlecase}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="full-width">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Required Perforation</mat-label>
+                        <mat-select placeholder="--type--" id="perforation" name="perforation" formControlName="perforation">
+                          <mat-option *ngFor='let perforation of allPerforations' [value]="perforation">{{perforation.value|titlecase}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+
+            </mat-accordion>
+            <br>
+            <div>
+              <button id="previous" matStepperPrevious mat-fab>
+                <mat-icon>navigate_before</mat-icon>
+              </button>
+              <button id="next" matStepperNext mat-fab>
+                <mat-icon>navigate_next </mat-icon>
+              </button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="thirdFormGroup">
+
+            <ng-template matStepLabel>Stock</ng-template>
+            <br>
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Mill Name</mat-label>
+                    <input matInput placeholder="" id="mill_name" name="mill_name" formControlName="mill_name"
+                      autocomplete="off">
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- <div class="col-sm-4 ">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Grain Direction</mat-label>
+                    <mat-select placeholder="Unit" id="grain_direction" name="grain_direction" formControlName="grain_direction">
+                      <mat-option value="none"> None </mat-option>
+                      <mat-option value="lg">LG</mat-option>
+                      <mat-option value="sg">SG</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <div class="col-sm-4">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <mat-select placeholder="--type--" id="description" name="description" formControlName="description">
+
+                      <mat-option *ngFor="let description of allDescriptions " [value]="description">
+                        {{description.type| titlecase}}
+                      </mat-option>
+                    </mat-select>
+                    <!-- </mat-autocomplete> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Coated Sides</mat-label>
+                    <mat-select placeholder="--type--" id="coated_sides" name="coated_sides" formControlName="coated_sides">
+                      <mat-option *ngFor="let coatedSides of allCoatedSides" [value]="coatedSides">{{coatedSides.type|
+                        titlecase}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Weight</mat-label>
+                    <input matInput placeholder="" min="0" type="number" id="weight" name="weight" formControlName="weight">
+                    <span matSuffix class="unit">gsm</span>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Thickness</mat-label>
+                    <input matInput type="number" min="0" id="thickness" name="thickness" formControlName="thickness">
+                    <span matSuffix class="unit">{{thicknessUnit}}</span>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="full-width">
+                  <label class="example-selected-value">Thickness Unit:</label>
+                  <mat-radio-group class="example-radio-group" (change)="onThnicknessUnit($event)" id="thickness_unit"
+                    name="thickness_unit" formControlName="thickness_unit">
+                    <mat-radio-button class="example-radio-button" value="point" checked>point </mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="micro">micro</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <!-- <div class="col-sm-6">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Stock Length</mat-label>
+                    <input matInput min='0' type="number" id="stock_length" name="stock_length" formControlName="stock_length">
+                    <span matSuffix class="unit">inches</span>
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <!-- <div class="col-sm-6">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Stock Width</mat-label>
+                    <input matInput type="number" min="0" id="stock_width" name="stock_width" formControlName="stock_width">
+                    <span matSuffix class="unit">inches</span>
+                  </mat-form-field>
+                </div>
+              </div> -->
+            </div>
+            <div>
+              <button id="previous" matStepperPrevious mat-fab>
+                <mat-icon>navigate_before</mat-icon>
+              </button>
+              <button id="next" matStepperNext mat-fab>
+                <mat-icon>navigate_next </mat-icon>
+              </button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="fourthFormGroup">
+            <ng-template matStepLabel>Packing</ng-template>
+            <br>
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Bundle Size</mat-label>
+                    <input matInput min="0" type="number" id="bundle" name="bundle" formControlName="bundle">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primary Packing</mat-label>
+                    <mat-select placeholder="--type--" id="primary_pack" name="primary_pack" formControlName="primary_pack"
+                      multiple>
+                      <mat-option *ngFor='let primaryPack of allPrimaryPackings' [value]="primaryPack._id">{{primaryPack.type|
+                        titlecase}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div>
+                  <label class="container">Required Carton
+                    <input id="carton" name="carton" formControlName="carton" value="Yes" type="checkbox" [checked]='cartonChecked'>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div>
+                  <label class="container">Required Pallet
+                    <input id="pallet" name="pallet" formControlName="pallet" value="Yes" type="checkbox" [checked]='palletChecked'>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button id="previous" matStepperPrevious mat-fab>
+                <mat-icon>navigate_before</mat-icon>
+              </button>
+              <button type="submit" matTooltip="Save Package Information" matTooltipPosition="right" value="submit" id="done"
+                (click)="onAddPackageInfo()" mat-fab color="primary">
+                <mat-icon>done_outline</mat-icon>
+              </button>
+            </div>
+          </mat-step>
+          <!-- <mat-step [stepControl]="fourthFormGroup">
+            <ng-template matStepLabel>Delivery</ng-template>
+            <br>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Location</mat-label>
+                    <input matInput placeholder="" id="location" name="location" formControlName="location"
+                      autocomplete="off">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Delivery Date</mat-label>
+                    <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" id="delivery_date"
+                      formControlName="delivery_date" name="delivery_date" autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="full-width">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Delivery By</mat-label>
+                    <mat-select placeholder="--type--" id="delivered_by" name="delivered_by" formControlName="delivered_by">
+                      <mat-option *ngFor='let deliverby of   allDeliverBys' [value]='deliverby'>{{deliverby.type}}
+                      </mat-option>
+
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button id="previous" matStepperPrevious mat-fab color="primary" (click)="onClick75()">
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <button type="submit" matTooltip="Save Package Information" matTooltipPosition="right" value="submit" id="done"
+                (click)="onAddPackageInfo()" mat-fab color="primary">
+                <mat-icon>done_outline</mat-icon>
+              </button>
+            </div>
+          </mat-step> -->
+
+        </mat-horizontal-stepper>
+      </form>
+    </div>
+    <div class="card-footer text-muted">
+      &copy; All rights reserved
+    </div>
+  </div>
+</div>
+<!-- {{addPackageInfo.value | json}} -->

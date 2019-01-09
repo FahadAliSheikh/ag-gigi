@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Edit Person</h2>
+    <form [formGroup]='editPerson'>
+        <mat-dialog-content class="mat-typography">
+      <div class="row">
+        <div class="col-sm-6 offset-3 ">
+          <div class="full-width">
+            <mat-form-field appearance="outline">
+              <mat-label>Person name</mat-label>
+              <input matInput required placeholder="" id="concerned_person" name="concerned_person" formControlName="concerned_person"
+                autocomplete="off">
+              <mat-error>Company name is <strong>Required!!</strong></mat-error>
+              <mat-icon matSuffix>business</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-3 ">
+          <div class="full-width">
+            <mat-form-field appearance="outline">
+              <mat-label>Person Phone</mat-label>
+              <input matInput id="concerned_person_phone" name="concerned_person_phone" formControlName="concerned_person_phone"
+                autocomplete="off">
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-sm-6 offset-3 ">
+          <div class="full-width">
+            <mat-form-field appearance="outline">
+              <mat-label>Person Email</mat-label>
+              <input matInput placeholder="" id="concerned_person_email" name="concerned_person_email" formControlName="concerned_person_email"
+                autocomplete="off">
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close>Cancel</button>
+      &nbsp;
+      <button mat-raised-button color="primary" [mat-dialog-close]="true" [disabled]="editPerson.invalid" (click)='onEditPerson()'>Edit</button>
+    </mat-dialog-actions>
+    </form>

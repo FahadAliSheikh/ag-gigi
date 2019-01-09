@@ -1,0 +1,111 @@
+<div *ngIf="loading">
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <div class="card text-center offset-1" id="card">
+    <div class="card-body">
+      <h3 class="card-title ">All Costings</h3>
+      <h6 class="card-subtitle mb-2 text-muted">From this page you can find all the inserted Costing you saved</h6>
+      <br>
+      <div [ngClass]="messageClass">
+        {{message}}
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Search..</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <!-- <div class="col-sm-2 addDiv">
+          <button [routerLink]="['']" mat-raised-button color="primary" class="addButton" matTooltip="Generate cost"
+            matTooltipPosition="right">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </div> -->
+      </div>
+
+      <div class="full_width example-container mat-elevation-z0">
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+          <ng-container matColumnDef="programme_id">
+            <th mat-header-cell *matHeaderCellDef>Program ID</th>
+            <td mat-cell *matCellDef="let element"> {{element.programme_id}} </td>
+          </ng-container>
+          <ng-container class="table_data" matColumnDef="programme_name">
+            <th mat-header-cell *matHeaderCellDef> Program Name </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.programme_name}} </td>
+          </ng-container>
+          <ng-container class="table_data" matColumnDef="company_name">
+            <th mat-header-cell *matHeaderCellDef> Company Name </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.company_name}}</td>
+          </ng-container>
+          <ng-container class="table_data" matColumnDef="buyer_name">
+            <th mat-header-cell *matHeaderCellDef> Buyer Name </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.buyer_name}}
+
+            </td>
+          </ng-container>
+          <ng-container class="table_data" matColumnDef="create">
+            <th mat-header-cell *matHeaderCellDef> Generate One </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+              <button mat-icon-button class="generate" [routerLink]="['/production/costing/package/', element._id,'create-costing' ]">
+                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+              </button>
+
+            </td>
+          </ng-container>
+
+
+          <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+              <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <div class="example-element-description" class="full_width" style="
+              width: 80%;
+              padding-left: 10%;
+              padding-right: 10%;">
+                  All costs related to the Package will be shown here
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+          </tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+        <mat-paginator #paginator [pageSizeOptions]="[10, 15, 20, 25, 30]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+
+
+
+
+
+
+
+    </div>
+    <div class="card-footer text-muted">
+      &copy; All rights reserved
+    </div>
+  </div>
+</div>

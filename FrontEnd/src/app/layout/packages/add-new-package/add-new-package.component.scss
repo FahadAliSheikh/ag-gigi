@@ -1,0 +1,118 @@
+$background-color: #548e89;
+  #next,#done{
+    float: right;
+    background-color: $background-color !important;
+  }
+  #previous{
+    float: left;
+    background-color: $background-color !important;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon {
+    background-color: $background-color !important;
+    color: rgba(255,255,255,.87);
+  }
+ /* Border */
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick{
+    color: $background-color;;
+  }
+  /* Font color */
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: $background-color;
+    
+  }
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+  .unit {
+      position: relative;
+      top:-4px;
+  }
+  ::ng-deep  .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: $background-color;
+  }
+
+  ::ng-deep   .mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
+    background-color: $background-color;
+  }
+  ::ng-deep  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:$background-color;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background{
+    background-color: $background-color;
+  }
+  ::ng-deep .mat-icon-button{
+    position: relative !important;
+    bottom: -7px !important;
+  }
+::ng-deep .mat-calendar-body-selected{
+  background-color: $background-color;
+}
+::ng-deep .mat-datepicker-toggle-active{
+  color : $background-color;
+}
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #548e89;
+}
+::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate{
+  background: #548e89;
+}
+
+#add_button{
+  background-color:rgb(223, 223, 223);
+  color: rgb(126, 126, 126);
+}
+
+//only chrome
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  #add_button{
+    position: relative;
+    top: 1px;
+  }
+}
+
+.show{
+  visibility: visible;
+}
+.hide {
+  visibility: hidden;
+}
+
+.example-radio-group {
+  display: inline-flex;
+  // flex-direction: column;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.example-selected-value {
+  margin: 5px 0;
+  text-align: left;
+}
+
+::ng-deep .search{
+  font-weight: 600;
+    color:#548e89 !important;
+    border-bottom: 1px solid #548e89;
+  }

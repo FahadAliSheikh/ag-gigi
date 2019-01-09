@@ -1,0 +1,411 @@
+<div *ngIf="loading">
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <div class="card offset-1" id="card">
+    <div class="card-body">
+      <div id="printablearea">
+        <div class="row">
+          <div class='col-sm-12'>
+            <img class="avatar" src="../assets/images/logo.png">
+            <div class="title">Packaging Specification</div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class='col-sm-5'>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tr>
+                  <th width=50% class="tabletitle">Program ID</th>
+                  <td width=50% class="datafield">{{package?.programme_id | titlecase}}</td>
+                </tr>
+                <tr>
+                  <th width=50% class="tabletitle">Program Name</th>
+                  <td width=50% class="datafield">{{package?.programme_name | titlecase}}</td>
+                </tr>
+                <tr>
+                  <th width=50% class="tabletitle">Artwork Code</th>
+                  <td width=50% class="datafield">{{package?.artwork_code | titlecase}}</td>
+                </tr>
+                <tr>
+                  <th width=50% class="tabletitle">Buyer Name</th>
+                  <td width=50% class="datafield">{{package?.buyer?.buyer_name | titlecase}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class='col-sm-2'>
+          </div>
+          <div class='col-sm-5'>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tr>
+                  <th width=50% class="tabletitle">Date</th>
+                  <td width=50% class="datafield">{{package?.created_date | date :'mediumDate'}}</td>
+                </tr>
+                <!-- <tr>
+                  <th width=50% class="tabletitle">Merchandiser</th>
+                  <td width=50% class="datafield">{{package?.merchandiser.username | titlecase}}</td>
+                </tr>
+                <tr>
+                  <th width=50% class="tabletitle">Production</th>
+                  <td width=50% class="datafield">{{package?.production.username | titlecase}}</td>
+                </tr> -->
+              </table>
+            </div>
+          </div>
+          <div class='col-sm-5'>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tr>
+                  <th width=100% class="tabletitleCenter">Customer</th>
+                </tr>
+                <tr>
+                  <td width=100% class="datafield">
+                    <span>{{package?.company?.company_name | titlecase}}</span>
+                    <br>
+                    <span>{{package?.company?.company_address}}</span>
+                    <br>
+                    <span>{{package?.company?.company_telephone}}</span>
+
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class='col-sm-2'>
+          </div>
+          <div class='col-sm-5'>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tr>
+                  <th width=100% class="tabletitleCenter">Concerned Person</th>
+                </tr>
+                <tr>
+                  <td width=100% class="datafield">
+                    <span>{{package?.concerned_person?.concerned_person | titlecase}}</span>
+                    <br>
+                    <span>{{package?.concerned_person?.concerned_person_email}}</span>
+                    <br>
+                    <span>{{package?.concerned_person?.concerned_person_phone}}</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class='col-sm-12'>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th width=100% colspan=4 class="tabletitleCenter">Product Information</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td width=25% class="datatitlefield">Package Format</td>
+                    <td width=25% class="datafield">{{package?.product?.package_format.type}}</td>
+                    <!-- <td width=25% class="datatitlefield">Quantity</td>
+                    <td width=25% class="datafield">{{package?.product?.quantity | number}}</td> -->
+                  </tr>
+                  <tr>
+                    <th width=50% colspan=2 class="tabletitleCenter">Flat Size</th>
+                    <th width=50% colspan=2 class="tabletitleCenter">Carton Size</th>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Length</td>
+                    <td width=25% class="datafield">{{package?.product?.flat?.flat_length}}
+                      <span class="right">inch</span>
+                    </td>
+                    <td width=25% class="datatitlefield">Length</td>
+                    <td width=25% class="datafield">{{package?.product?.carton?.carton_length}}
+                      <span class="right">inch</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Width</td>
+                    <td width=25% class="datafield">{{package?.product?.flat?.flat_width}}
+                      <span class="right">inch</span>
+                    </td>
+                    <td width=25% class="datatitlefield">Width</td>
+                    <td width=25% class="datafield">{{package?.product?.carton?.carton_width}}
+                      <span class="right">inch</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Trim Size</td>
+                    <td width=25% class="datafield">{{package?.product?.flat?.flat_trim}}
+                      <span class="right">inch</span>
+                    </td>
+                    <td width=25% class="datatitlefield">Height</td>
+                    <td width=25% class="datafield">{{package?.product?.carton?.carton_height}}
+                      <span class="right">inch</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Gutter Size</td>
+                    <td width=25% class="datafield">{{package?.product?.flat?.flat_gutter}}
+                      <span class="right">inch</span>
+                    </td>
+                    <td width=25% class="datatitlefield">Flap</td>
+                    <td width=25% class="datafield">{{package?.product?.carton?.carton_flap}}
+                      <span class="right">inch</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield"></td>
+                    <td width=25% class="datafield"></td>
+                    <td width=25% class="datatitlefield">Zay</td>
+                    <td width=25% class="datafield">{{package?.product?.carton?.carton_zay}}
+                      <span class="right">inch</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th colspan="4" class="tabletitleCenter">Colors</th>
+                  </tr>
+                  <tr>
+                    <td width=50% colspan="2" class="datatitlefieldcenter">Front</td>
+                    <td width=50% colspan="2" class="datatitlefieldcenter">Back</td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Process</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let color of front_process_colors">{{color | titlecase}}, </span>
+                    </td>
+                    <td width=25% class="datatitlefield">Process</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let color of back_process_colors">{{color | titlecase}}, </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Spot</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let color of front_spot_colors">{{color | titlecase}}, </span>
+                    </td>
+                    <td width=25% class="datatitlefield">Spot</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let color of back_spot_colors">{{color | titlecase}}, </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Imprint/Variable</td>
+                    <td width=25% class="datafield">{{package?.product?.imprint | titlecase}}</td>
+                    <td width=25% class="datatitlefield">Bar Code</td>
+                    <td width=25% class="datafield">{{package?.product?.barcode.type | uppercase }}</td>
+                  </tr>
+                  <tr>
+                    <td width=25% colspan="1" class="datatitlefield">variable Colors</td>
+                    <td width=75% colspan="3" class="datafield">
+                      <span *ngFor="let color of variable_colors">{{color | titlecase}}, </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th colspan="4" class="tabletitleCenter">Coating</th>
+                  </tr>
+                  <tr>
+                    <td width=50% colspan="2" class="datatitlefieldcenter">Front</td>
+                    <td width=50% colspan="2" class="datatitlefieldcenter">Back</td>
+                  </tr>
+                  <tr>
+                    <td width=50% colspan="2"> <span *ngFor="let coating of front_coatings"> {{coating.type | titlecase
+                        }}, </span> </td>
+
+                    <td width=50% colspan="2"> <span *ngFor="let coating of back_coatings"> {{coating.type | titlecase
+                        }}, </span> </td>
+
+                  </tr>
+
+                  <tr>
+                    <th colspan="4" class="tabletitleCenter">Finishing</th>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Cut Type</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let cut of cut_types">
+                        {{ cut.type | titlecase }}, </span></td>
+                    <td width=25% class="datatitlefield">Required Punch</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.punch_required | titlecase }}</td>
+                  </tr>
+                  <!-- <tr>
+                    <td width=25% class="datatitlefield">Secondary Print</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let secondary_print of secondary_prints">
+                        {{ secondary_print.type | titlecase }}, </span></td>
+                    <td width=25% class="datatitlefield">Required Punch</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.punch_required | titlecase }}</td>
+                  </tr> -->
+                  <tr>
+                    <td width=25% class="datatitlefield">Pasting</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let pasting of pastings">
+                        {{ pasting.type | titlecase }}, </span>
+                    </td>
+                    <td width=25% class="datatitlefield">Punch Diameter</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.punch_diameter}}
+                      <span class="right">inch</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Speical Pasting</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let special_req of special_requirements">
+                        {{ special_req.type | titlecase }}, </span>
+                    </td>
+                    <td width=25% class="datatitlefield">Required Thread</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.thread_required | titlecase }}</td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Required Folding</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.folding.value | titlecase }}</td>
+                    <td width=25% class="datatitlefield">Thread Type</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.thread_type.type | titlecase }}</td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Required Perforation</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.perforation.value | titlecase}}</td>
+                    <td width=25% class="datatitlefield">Thread Length</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.thread_length }}
+                      <span class="right">inch</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width=25% class="datatitlefield">Secondary Print</td>
+                    <td width=25% class="datafield">
+                      <span *ngFor="let secondary_print of secondary_prints">
+                        {{ secondary_print.type | titlecase }}, </span></td>
+                    <!-- <td width=25% class="datatitlefield">Required Punch</td>
+                    <td width=25% class="datafield">{{package?.product?.finishing?.punch_required | titlecase }}</td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tr>
+                  <th width=100% colspan="4" class="tabletitleCenter">Stock Information</th>
+                </tr>
+                <tr>
+                  <td width=25% class="datatitlefield">Mill Name</td>
+                  <td width=25% class="datafield">{{package?.stock?.mill_name | titlecase }}</td>
+                  <!-- <td width=25% class="datatitlefield">Grain Direction</td>
+                  <td width=25% class="datafield">{{package?.stock?.grain_direction | titlecase }}</td> -->
+                </tr>
+                <tr>
+                  <td width=25% class="datatitlefield">Description</td>
+                  <td width=25% class="datafield">{{package?.stock?.description.type | titlecase}}</td>
+                  <td width=25% class="datatitlefield">Weight</td>
+                  <td width=25% class="datafield">{{package?.stock?.weight }}
+                    <span class="right">gsm</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=25% class="datatitlefield">Coated Sides</td>
+                  <td width=25% class="datafield">{{package?.stock?.coated_sides.type | titlecase }}</td>
+                  <td width=25% class="datatitlefield">Thickness</td>
+                  <td width=25% class="datafield">{{package?.stock?.thickness }}
+                    <span class="right">{{package?.stock?.stock_thickness_unit}}</span>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td width=25% class="datatitlefield">Length</td>
+                  <td width=25% class="datafield">{{package?.stock?.stock_length }}
+                    <span class="right">inch</span>
+                  </td>
+                  <td width=25% class="datatitlefield">Width</td>
+                  <td width=25% class="datafield">{{package?.stock?.stock_width }}
+                    <span class="right">inch</span>
+                  </td>
+                </tr> -->
+              </table>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tr>
+                  <th width=100% colspan="2" class="tabletitleCenter">Packing Information</th>
+                </tr>
+                <tr>
+                  <td width=50% class="datatitlefield">Bundle</td>
+                  <td width=50% class="datafield">{{package?.packing?.bundle | number}}</td>
+                </tr>
+                <tr>
+                  <td width=50% class="datatitlefield">Primary Packing</td>
+                  <td width=50% class="datafield">
+                    <span *ngFor="let primary_pack of primary_packings">
+                      {{ primary_pack.type | titlecase }}, </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=50% class="datatitlefield">Required Carton</td>
+                  <td width=50% class="datafield">{{package?.packing?.carton |titlecase}}</td>
+                </tr>
+                <tr>
+                  <td width=50% class="datatitlefield">Required Pallet</td>
+                  <td width=50% class="datafield"> {{package?.packing?.pallet |titlecase}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- <div class="col-sm-6">
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <tr>
+                  <th width=100% colspan="2" class="tabletitleCenter">Delivery Information</th>
+                </tr>
+                <tr>
+                  <td width=50% class="datatitlefield">Location</td>
+                  <td width=50% class="datafield">{{package?.delivery?.location }}</td>
+                </tr>
+                <tr>
+                  <td width=50% class="datatitlefield">Delivery Date</td>
+                  <td width=50% class="datafield">{{package?.delivery?.date | date :'mediumDate' }}</td>
+                </tr>
+                <tr>
+                  <td width=50% class="datatitlefield">Delivery By</td>
+                  <td width=50% class="datafield">{{package?.delivery?.delivered_by.type | titlecase }}</td>
+                </tr>
+              </table>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      &copy; All rights reserved
+    </div>
+  </div>
+  <a mat-fab [routerLink]="['/production/packages/edit-package/',package?._id]" id="edit" matTooltip="Edit this Package"
+    matTooltipPosition="left">
+    <mat-icon>edit</mat-icon>
+  </a>
+  <a mat-fab id="image" matTooltip="View Package Image" matTooltipPosition="left" href="{{urlService.basicUrl}}{{package?.product?.product_image}}"
+    target="_blank">
+    <mat-icon>photo</mat-icon>
+  </a>
+  <button mat-fab matTooltip="Print Package Specification" matTooltipPosition="left" (click)="print()" id="print">
+    <mat-icon>print</mat-icon>
+  </button>
+  <a mat-fab (click)='openDeleteConformationDialog( package?._id)' id="delete" matTooltip="Delete this Package"
+    matTooltipPosition="left">
+    <mat-icon>delete</mat-icon>
+  </a>
+</div>

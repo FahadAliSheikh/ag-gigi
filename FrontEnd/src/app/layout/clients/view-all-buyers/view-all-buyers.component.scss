@@ -1,0 +1,86 @@
+$background-color: #548e89;
+
+table {
+  width: 100%;
+}
+mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.mat-cell{
+  font-size: 14px;
+  font-family: Arial,Helvetica,sans-serif !important;
+}
+
+th.mat-header-cell{
+  font-size: 14px;
+  color: rgba(0,0,0,.87);
+  text-align: center !important;
+  font-weight: bold;
+  font-family: Arial,Helvetica,sans-serif !important;
+}
+
+tr:hover{
+  cursor: pointer !important;
+  background: #f4f4f4 !important;
+}
+
+#delete{
+color: rgb(255, 101, 101);
+}
+#edit{
+color:rgb(66, 145, 66);
+}
+.example-container {
+overflow: auto;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick{
+  color: $background-color;;
+}
+/* Font color */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: $background-color;
+  
+}
+::ng-deep .mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
+  background-color: $background-color !important;
+}
+.table_data{
+  padding: 0px 7px 0px 7px !important;
+}
+
+.addButton{
+  background: #548e89;
+  height: 49px;
+  border-radius: 4px;
+}
+.addDiv{
+  padding-top: 4px;
+}
+
+::ng-deep .mat-ink-bar{
+    background-color:#548e89 !important;
+}
+::ng-deep .mat-tab-header, .mat-tab-nav-bar{
+border-bottom: none;
+}
+a:hover{
+    text-decoration: none;
+}
+a:nth-child(1):hover{
+    color: black;
+    text-decoration: none;
+}
+a:nth-child(n+2):hover {
+    cursor: not-allowed;
+}
+
+::ng-deep .mat-tab-link{
+    font-weight: 600;
+}
+nav{
+    margin-left: 25%;
+    margin-right: 25%;
+    overflow: auto
+}

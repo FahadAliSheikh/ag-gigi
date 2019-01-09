@@ -1,0 +1,74 @@
+<div *ngIf="loading">
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+<div *ngIf="!loading">
+
+  <div class="card text-center card offset-1 test" id="card">
+    <div class="card-body">
+      <h3 class="card-title ">Calculate Costing</h3>
+
+      <form [formGroup]=calculateCosting>
+        <div class="row">
+
+
+          <div class="col-sm-3 full-width">
+            <div class="full-width">
+              <mat-form-field appearance="outline">
+                <mat-label>Quantity</mat-label>
+                <input matInput min='0' type="number" placeholder="" id="quantity" name="quantity" formControlName="quantity"
+                  autocomplete="off">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-sm-3 full-width">
+            <div class="full-width">
+              <mat-form-field appearance="outline">
+                <mat-label>Stock Rate</mat-label>
+                <input matInput min='0' type="number" placeholder="" id="stock_rate" name="stock_rate" formControlName="stock_rate"
+                  autocomplete="off">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-sm-3 full-width">
+            <mat-form-field appearance="outline">
+              <mat-label>Stock Rate Unit</mat-label>
+              <mat-select formControlName='stock_rate_unit'>
+                <mat-option value="rs_per_pkt">Per Packet</mat-option>
+                <mat-option value="rs_per_kg">Per Kg</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-3 full-width">
+            <mat-form-field appearance="outline">
+              <mat-label>Delivery Charges</mat-label>
+              <input matInput min='0' type="number" placeholder="" id="delivery_charges" name="delivery_charges" formControlName="delivery_charges"
+                autocomplete="off">
+            </mat-form-field>
+          </div>
+        </div>
+        <input type="submit" (click)="onCalculateCosting()">
+      </form>
+
+    </div>
+    <div class="card-footer text-muted text-center">
+      &copy; All rights reserved
+    </div>
+  </div>
+</div>
+
+{{ calculateCosting.value|json}}

@@ -1,0 +1,53 @@
+
+<mat-sidenav-container *ngIf='authService.user' class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-nav-list id="header0v_0">
+      <a mat-list-item href="/production">
+        <img src="../../../../assets/images/logo.png" style="width:35px;
+        height:40px; margin: 0px 15px 0px 15px" alt="">
+        <span style="font-size:25px; color:#a1c8ee"> <b>AG-GIGI</b> </span>
+      </a>
+      <a mat-list-item [routerLink]="['/production/packages/view-all-packages']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:
+        true}"> 
+        <mat-icon style="margin: 0px 15px 0px 0px">layers</mat-icon> 
+        Packages
+      </a>
+      <!-- <a mat-list-item [routerLink]="['/production/packages/add-new-package']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:
+        true}">
+        <mat-icon style="margin: 0px 15px 0px 0px">add_box</mat-icon>
+        Add New Package
+      </a> -->
+      <a mat-list-item [routerLink]="['/production/clients/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:
+        false}">
+        <mat-icon style="margin: 0px 15px 0px 0px">people</mat-icon>
+        Clients
+      </a>
+      <a mat-list-item [routerLink]="['/production/costing/view-all-costs']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:
+        true}">
+        <mat-icon style="margin: 0px 15px 0px 0px">attach_money</mat-icon>
+        Costing
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+        <button class="" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+
+      <button mat-button [matMenuTriggerFor]="appMenu" class="ml-auto">
+          Welcome Back, {{authService.user.username}}! <mat-icon>person_pin</mat-icon>
+      </button>  
+      <mat-menu #appMenu="matMenu">
+            <ng-template matMenuContent>
+              <a mat-menu-item><mat-icon>settings</mat-icon> Settings</a>
+              <mat-divider></mat-divider>
+              <a mat-menu-item [routerLink]="['/login']" (click)="onLoggedout()"><mat-icon>power_settings_new</mat-icon>{{ 'Log Out'}}</a>
+            </ng-template>
+          </mat-menu>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

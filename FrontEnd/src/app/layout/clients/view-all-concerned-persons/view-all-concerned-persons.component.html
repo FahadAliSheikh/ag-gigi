@@ -1,0 +1,104 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link [routerLink]="['/production/clients/']"> Companies </a>
+
+  <a mat-tab-link [disabled]="true"> Buyers </a>
+
+  <a mat-tab-link [active]="true" [disabled]="true">Concerned Persons</a>
+</nav>
+<br>
+<div *ngIf="loading">
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+
+<div *ngIf="!loading">
+
+  <div style="position:relative">
+   
+  </div>
+  <div class="card text-center offset-1" id="card">
+    <div class="card-body">
+      <br>
+        Concerned Persons Table
+      <br>
+      <div class="row">
+        <div class="col-sm-10">
+            <div class="full-width">
+                <mat-form-field appearance="outline">
+                  <mat-label>Search..</mat-label>
+                  <input matInput autocomplete="off">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+              </div>
+        </div>
+        <div class="col-sm-2 addDiv">
+            <button (mousedown)="openAddConcernedPersonDialog()" mat-raised-button color="primary" class="addButton" matTooltip="Add Concerned Person"
+            matTooltipPosition="left">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="example-container mat-elevation-z0">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container class="table_data" matColumnDef="concerned_person">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.concerned_person}} </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container class="table_data" matColumnDef="concerned_person_email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.concerned_person_email}} </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container class="table_data" matColumnDef="concerned_person_phone">
+            <th mat-header-cell *matHeaderCellDef>Phone </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.concerned_person_phone}} </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container class="table_data" matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action </th>
+
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+              <!-- <a (click)='deletePerson( element._id)' class="btn btn-default delete" matTooltip="Delete this Package">
+                <mat-icon id="delete">delete</mat-icon>
+              </a> -->
+
+              <a class="btn btn-default" (click)="openEditBuyerDialog(element._id)" matTooltip="Edit this Package">
+                <mat-icon id="edit">edit</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[10, 15, 20, 25, 30]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+    <!-- card body ends -->
+    <div class="card-footer text-muted">
+      &copy; All rights reserved
+    </div>
+  </div>
+
+</div>

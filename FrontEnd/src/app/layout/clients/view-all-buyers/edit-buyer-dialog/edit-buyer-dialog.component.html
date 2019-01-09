@@ -1,0 +1,24 @@
+
+<h2 mat-dialog-title>Edit Buyer</h2>
+      <form [formGroup]='editBuyer'>
+          <mat-dialog-content class="mat-typography">
+        <div class="row">
+          <div class="col-sm-6 offset-3">
+            <div class="full-width">
+              <mat-form-field appearance="outline">
+                <mat-label>Buyer name</mat-label>
+                <input matInput required placeholder="" id="buyer_name" name="buyer_name" formControlName="buyer_name"
+                  autocomplete="off">
+                <mat-error>Buyer name is <strong>Required!!</strong></mat-error>
+                <mat-icon matSuffix>business</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close>Cancel</button>
+        &nbsp;
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" [disabled]="editBuyer.invalid" (click)='onEditBuyer()'>Edit</button>
+      </mat-dialog-actions>
+      </form>

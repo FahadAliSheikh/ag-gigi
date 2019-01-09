@@ -1,0 +1,186 @@
+<div *ngIf="loading">
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <mat-toolbar style='margin-left: 0%'>FLUX CAP SALE 20MG</mat-toolbar>
+  <div class="row" style="margin-right:0">
+    <div class="col-lg-8">
+      <div style='margin-left: 3%'>
+        <div class="row">
+          <div class="col-sm-3">
+            <mat-card matRipple style="text-align:center; cursor: pointer;" (click)='viewMoreStock()'>
+              <mat-card-header>
+                <mat-card-subtitle><small>Stock</small></mat-card-subtitle>
+              </mat-card-header>
+              <h6>31 x 43</h6>
+              <mat-list [@detailExpand]="view_more_stock ? 'expanded' : 'collapsed'">
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>Bleach Card</small></mat-list-item>
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>Long Grain</small></mat-list-item>
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>310 GSM</small></mat-list-item>
+              </mat-list>
+              <mat-card-footer>
+                <mat-icon class="text-muted" [@expendMore1]="view_more_stock ? 'rotate' : 'notRotate'">expand_more</mat-icon>
+              </mat-card-footer>
+            </mat-card>
+          </div>
+          <div class="col-sm-3">
+            <mat-card matRipple style="text-align:center; cursor: pointer;" (click)='viewMoreNoOfPressSheets()'>
+              <mat-card-header>
+                <mat-card-subtitle><small># Of Press Sheet</small></mat-card-subtitle>
+              </mat-card-header>
+              <h6>6</h6>
+              <mat-list [@detailExpand]="view_more_no_of_press_sheet ? 'expanded' : 'collapsed'">
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>Row: 2</small></mat-list-item>
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>Col: 3</small></mat-list-item>
+              </mat-list>
+              <mat-card-footer>
+                <mat-icon class="text-muted" [@expendMore2]="view_more_no_of_press_sheet ? 'rotate' : 'notRotate'">expand_more</mat-icon>
+              </mat-card-footer>
+            </mat-card>
+          </div>
+          <div class="col-sm-3">
+            <mat-card matRipple style="text-align:center; cursor: pointer;" (click)='viewMorePressSheet()'>
+              <mat-card-header>
+                <mat-card-subtitle><small>Press Sheet Size</small></mat-card-subtitle>
+              </mat-card-header>
+              <h6>15.5 x 14.33</h6>
+              <mat-list [@detailExpand]="view_more_press_sheet ? 'expanded' : 'collapsed'">
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>Long Grain</small></mat-list-item>
+              </mat-list>
+              <mat-card-footer>
+                <mat-icon class="text-muted" [@expendMore3]="view_more_press_sheet ? 'rotate' : 'notRotate'">expand_more</mat-icon>
+              </mat-card-footer>
+            </mat-card>
+          </div>
+          <div class="col-sm-3">
+            <mat-card matRipple style="text-align:center; cursor: pointer;" (click)='viewMoreNoOfUps()'>
+              <mat-card-header>
+                <mat-card-subtitle><small># Of Ups</small></mat-card-subtitle>
+              </mat-card-header>
+              <h6>6</h6>
+              <mat-list [@detailExpand]="view_more_no_of_ups ? 'expanded' : 'collapsed'">
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>Row: 2</small></mat-list-item>
+                <mat-divider [inset]="true"></mat-divider>
+                <mat-list-item class="text-muted"><small>Col: 3</small></mat-list-item>
+              </mat-list>
+              <mat-card-footer>
+                <mat-icon class="text-muted" [@expendMore4]="view_more_no_of_ups ? 'rotate' : 'notRotate'">expand_more</mat-icon>
+              </mat-card-footer>
+            </mat-card>
+          </div>
+          <div class='col-sm-12'>
+            <br>
+            <div class="example-container mat-elevation-z8">
+              <table mat-table [dataSource]="transactions">
+                <!-- Item Column -->
+                <ng-container matColumnDef="item">
+                  <th mat-header-cell *matHeaderCellDef> Entity </th>
+                  <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+                  <td mat-footer-cell *matFooterCellDef> Total Costs </td>
+                </ng-container>
+
+                <!-- Cost Column -->
+                <ng-container matColumnDef="cost">
+                  <th mat-header-cell *matHeaderCellDef> Cost </th>
+                  <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+                  <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+                </ng-container>
+
+                <!-- Disclaimer column -->
+                <ng-container matColumnDef="disclaimer">
+                  <td mat-footer-cell *matFooterCellDef colspan="2">
+                    Please note that the cost of items displayed are completely and totally made up.
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></tr>
+              </table>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Machines
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="example-container">
+            <mat-form-field>
+              <mat-select placeholder="Printing">
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Die Cutting">
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Straight Cutting">
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Quantity
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field>
+            <input matInput placeholder="Ordered Qty">
+          </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Stock Size
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field>
+              <input matInput placeholder="Ordered Qty">
+            </mat-form-field>
+          </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Delivery
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                  <input matInput placeholder="Ordered Qty">
+                </mat-form-field>
+              </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>
