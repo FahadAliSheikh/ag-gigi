@@ -205,6 +205,14 @@ function flatSizeCosting(
             //     stockLength: 23,
             //     stockWidth: 36
             // },
+            // {
+            //     stockLength: 22,
+            //     stockWidth: 28
+            // },
+            // {
+            //     stockLength: 20,
+            //     stockWidth: 30
+            // },
         ]
 
 
@@ -959,7 +967,7 @@ function cutStock(
 }
 
 function findMinCostSolution(solutionsWithCosts) {
-    console.log(solutionsWithCosts);
+    console.log(solutionsWithCosts.length);
     var result = solutionsWithCosts.reduce(function (res, obj) {
         return (obj.costs.total_cost <= res.costs.total_cost) ? obj : res;
     });
