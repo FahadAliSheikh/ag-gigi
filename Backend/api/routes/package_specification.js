@@ -168,8 +168,8 @@ router.post('/', middlewareObj.isAuthenticated, function (req, res, next) {
         var bundle = req.body.bundle;
         bundle = +bundle || 0;
         var primary_pack = JSON.parse(req.body.primary_pack);
-        var carton = req.body.carton;
-        var pallet = req.body.pallet;
+        // var carton = req.body.carton;
+        // var pallet = req.body.pallet;
         //delivery
         //var delivery_location = req.body.location;
         //var delivery_date = req.body.delivery_date;
@@ -263,8 +263,8 @@ router.post('/', middlewareObj.isAuthenticated, function (req, res, next) {
         newPackage.product.finishing.perforation = perforation;
         //packing
         newPackage.packing.bundle = bundle;
-        newPackage.packing.carton = carton;
-        newPackage.packing.pallet = pallet;
+        // newPackage.packing.carton = carton;
+        // newPackage.packing.pallet = pallet;
         //delivery
         // newPackage.delivery.location = delivery_location;
         // newPackage.delivery.date = delivery_date;
@@ -494,8 +494,8 @@ router.put('/:id', (req, res, next) => {
                             var bundle = req.body.bundle;
                             bundle = +bundle || 0;
                             foundPackage.packing.bundle = bundle;
-                            foundPackage.packing.carton = req.body.carton;
-                            foundPackage.packing.pallet = req.body.pallet;
+                            // foundPackage.packing.carton = req.body.carton;
+                            // foundPackage.packing.pallet = req.body.pallet;
                             //delivery
                             // foundPackage.delivery.location = req.body.location;
 

@@ -87,8 +87,8 @@ export class EditPackageComponent implements OnInit {
   activatedId;
   deliverydate;
   companyInput;
-  cartonChecked;
-  palletChecked;
+ // cartonChecked;
+ // palletChecked;
   thicknessUnit;
   concernedInput;
   buyerFiledValue;
@@ -138,8 +138,8 @@ export class EditPackageComponent implements OnInit {
   stockInfo = [];
   deliveryBy = [];
   allThreads = [];
-  allCartons = [];
-  allPallets = [];
+ // allCartons = [];
+ // allPallets = [];
   allFoldings = [];
   allPastings = [];
   allBarCodes = [];
@@ -760,12 +760,12 @@ export class EditPackageComponent implements OnInit {
       primary_pack: [
         ''
       ],
-      carton: [
-        ''
-      ],
-      pallet: [
-        ''
-      ],
+      // carton: [
+      //   ''
+      // ],
+      // pallet: [
+      //   ''
+      // ],
 
     })
   }
@@ -825,8 +825,8 @@ export class EditPackageComponent implements OnInit {
     // var stock_width = this.addPackageInfo.get('stock_width').value;
     var bundle = this.addPackageInfo.get('bundle').value;
     var primary_pack = this.addPackageInfo.get('primary_pack').value;
-    var carton = this.addPackageInfo.get('carton').value;
-    var pallet = this.addPackageInfo.get('pallet').value;
+    // var carton = this.addPackageInfo.get('carton').value;
+    // var pallet = this.addPackageInfo.get('pallet').value;
     // var location = this.addPackageInfo.get('location').value;
     // var delivery_date = this.addPackageInfo.get('delivery_date').value;
     // var delivered_by = this.addPackageInfo.get('delivered_by').value._id;
@@ -881,8 +881,8 @@ export class EditPackageComponent implements OnInit {
     //  fd.append('stock_width', stock_width);
     fd.append('bundle', bundle);
     fd.append('primary_pack', JSON.stringify(primary_pack));
-    fd.append('carton', carton);
-    fd.append('pallet', pallet);
+    // fd.append('carton', carton);
+    // fd.append('pallet', pallet);
     //  fd.append('location', location);
     // fd.append('delivery_date', delivery_date);
     //  fd.append('delivered_by', delivered_by);
@@ -1311,8 +1311,8 @@ export class EditPackageComponent implements OnInit {
           // this.addPackageInfo.get('stock_length').setValue(this.package.stock.stock_length);
           //  this.addPackageInfo.get('stock_width').setValue(this.package.stock.stock_width);
           this.addPackageInfo.get('bundle').setValue(this.package.packing.bundle);
-          this.addPackageInfo.get('carton').setValue(this.package.packing.carton);
-          this.addPackageInfo.get('pallet').setValue(this.package.packing.pallet);
+          // this.addPackageInfo.get('carton').setValue(this.package.packing.carton);
+          // this.addPackageInfo.get('pallet').setValue(this.package.packing.pallet);
           //  this.addPackageInfo.get('location').setValue(this.package.delivery.location);
           //  this.addPackageInfo.get('delivered_by').setValue(this.package.delivery.delivered_by);
           // if (this.package.delivery.date) {
@@ -1337,12 +1337,12 @@ export class EditPackageComponent implements OnInit {
             this.microChecked = true;
           }
           //checkbox
-          if (this.package.packing.carton == "true") {
-            this.cartonChecked = true
-          } else { this.cartonChecked = false; }
-          if (this.package.packing.pallet == "true") {
-            this.palletChecked = true
-          } else { this.palletChecked = false }
+          // if (this.package.packing.carton == "true") {
+          //   this.cartonChecked = true
+          // } else { this.cartonChecked = false; }
+          // if (this.package.packing.pallet == "true") {
+          //   this.palletChecked = true
+          // } else { this.palletChecked = false }
           //imagefilename
           this.fileName = this.package.product.product_image;
           this.loading = false;

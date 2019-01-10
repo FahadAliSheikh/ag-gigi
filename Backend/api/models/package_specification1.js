@@ -104,8 +104,8 @@ var pkg_specSchema = mongoose.Schema({
         primary_pack: [
             { type: mongoose.Schema.Types.ObjectId, ref: 'PrimaryPacking' }
         ],
-        carton: { type: String },
-        pallet: { type: String },
+        // carton: { type: String },
+        // pallet: { type: String },
     },//packing ends here
 
     // delivery: {

@@ -183,8 +183,8 @@ function flatSizeCosting(
     //var primaryPackPrice = foundPackage[0].packing.primary_pack.price;
     var primaryPacks = foundPackage[0].packing.primary_pack;
 
-    var carton = foundPackage[0].packing.carton;
-    var pallet = foundPackage[0].packing.pallet;
+    // var carton = foundPackage[0].packing.carton;
+    // var pallet = foundPackage[0].packing.pallet;
 
     var deliveryPrice = object.delivery_charges;
     deliveryPrice = +deliveryPrice;
@@ -436,16 +436,16 @@ function flatSizeCosting(
                             // Carton and pallet cost needs to be improved
 
                             // (13-cost)
-                            cartonCost = 0;
-                            if (carton == 'true') {
-                                cartonCost = 100
-                            }
+                            // cartonCost = 0;
+                            // if (carton == 'true') {
+                            //     cartonCost = 100
+                            // }
 
-                            // (14-cost)
-                            palletCost = 0;
-                            if (pallet == 'true') {
-                                palletCost = 100
-                            }
+                            // // (14-cost)
+                            // palletCost = 0;
+                            // if (pallet == 'true') {
+                            //     palletCost = 100
+                            // }
 
                             ////////////////---DELIVERY---/////////////////////////////
                             //delivery cost needs to be improved later with respect to km's
@@ -466,8 +466,8 @@ function flatSizeCosting(
                                 foldingCost +
                                 materialCost +
                                 primaryPackCost +
-                                cartonCost +
-                                palletCost +
+                                // cartonCost +
+                                // palletCost +
                                 deliveryCost);
 
                             ///////////////////////////////////////
@@ -516,8 +516,8 @@ function flatSizeCosting(
                                     'foldingCost': foldingCost,
                                     'materialCost': materialCost,
                                     'primaryPackCost': primaryPackCost,
-                                    'cartonCost': cartonCost,
-                                    'palletCost': palletCost,
+                                    // 'cartonCost': cartonCost,
+                                    // 'palletCost': palletCost,
                                     'deliveryCost': deliveryCost,
                                     'total_cost': totalCost,
                                 }
@@ -688,16 +688,16 @@ function flatSizeCosting(
                             // Carton and pallet cost needs to be improved
 
                             // (13-cost)
-                            cartonCost = 0;
-                            if (carton == 'true') {
-                                cartonCost = 100
-                            }
+                            // cartonCost = 0;
+                            // if (carton == 'true') {
+                            //     cartonCost = 100
+                            // }
 
-                            // (14-cost)
-                            palletCost = 0;
-                            if (pallet == 'true') {
-                                palletCost = 100
-                            }
+                            // // (14-cost)
+                            // palletCost = 0;
+                            // if (pallet == 'true') {
+                            //     palletCost = 100
+                            // }
 
                             ////////////////---DELIVERY---/////////////////////////////
                             //delivery cost needs to be improved later with respect to km's
@@ -718,8 +718,8 @@ function flatSizeCosting(
                                 foldingCost +
                                 materialCost +
                                 primaryPackCost +
-                                cartonCost +
-                                palletCost +
+                                // cartonCost +
+                                // palletCost +
                                 deliveryCost);
 
 
@@ -770,8 +770,8 @@ function flatSizeCosting(
                                     'foldingCost': foldingCost,
                                     'materialCost': materialCost,
                                     'primaryPackCost': primaryPackCost,
-                                    'cartonCost': cartonCost,
-                                    'palletCost': palletCost,
+                                    // 'cartonCost': cartonCost,
+                                    // 'palletCost': palletCost,
                                     'deliveryCost': deliveryCost,
                                     'total_cost': totalCost,
                                 }
@@ -1084,8 +1084,8 @@ function textileForNonStandardStock(
     //packing
     var bundleSize = foundPackage[0].packing.bundle;
     var primaryPacks = foundPackage[0].packing.primary_pack;
-    var carton = foundPackage[0].packing.carton;
-    var pallet = foundPackage[0].packing.pallet;
+    // var carton = foundPackage[0].packing.carton;
+    //var pallet = foundPackage[0].packing.pallet;
 
     var deliveryPrice = object.delivery_charges;
 

@@ -135,7 +135,7 @@ export class AddNewPackageComponent implements OnInit {
   barCodes = [];
   allThreads = [];
   allCartons = [];
-  allPallets = [];
+  // allPallets = [];
   allFoldings = [];
   allPastings = [];
   allBarCodes = [];
@@ -731,12 +731,12 @@ export class AddNewPackageComponent implements OnInit {
       primary_pack: [
         ''
       ],
-      carton: [
-        ''
-      ],
-      pallet: [
-        ''
-      ],
+      // carton: [
+      //   ''
+      // ],
+      // pallet: [
+      //   ''
+      // ],
 
     })
   }
@@ -789,8 +789,8 @@ export class AddNewPackageComponent implements OnInit {
     // var stock_width = this.addPackageInfo.get('stock_width').value;
     var bundle = this.addPackageInfo.get('bundle').value;
     var primary_pack = this.addPackageInfo.get('primary_pack').value;
-    var carton = this.addPackageInfo.get('carton').value;
-    var pallet = this.addPackageInfo.get('pallet').value;
+    // var carton = this.addPackageInfo.get('carton').value;
+    // var pallet = this.addPackageInfo.get('pallet').value;
     // var location = this.addPackageInfo.get('location').value;
     // var delivery_date = this.addPackageInfo.get('delivery_date').value;
     // var delivered_by = this.addPackageInfo.get('delivered_by').value._id;
@@ -842,8 +842,8 @@ export class AddNewPackageComponent implements OnInit {
     // fd.append('stock_width', stock_width);
     fd.append('bundle', bundle);
     fd.append('primary_pack', JSON.stringify(primary_pack));
-    fd.append('carton', carton);
-    fd.append('pallet', pallet);
+    // fd.append('carton', carton);
+    // fd.append('pallet', pallet);
     // fd.append('location', location);
     // fd.append('delivery_date', delivery_date);
     // fd.append('delivered_by', delivered_by);
@@ -1107,29 +1107,29 @@ export class AddNewPackageComponent implements OnInit {
   }
 
   //getAllCartons
-  getAllCartons() {
-    this.dropDownService.getAllCartons()
-      .subscribe(
-        data => {
-          // console.log(data);
-          this.allCartons = data.cartons;
-        }, err => {
-          console.log(err)
-        }
-      )
-  }
-  //getAllPallets
-  getAllPallets() {
-    this.dropDownService.getAllPallets()
-      .subscribe(
-        data => {
-          // console.log(data);
-          this.allPallets = data.pallets;
-        }, err => {
-          console.log(err)
-        }
-      )
-  }
+  // getAllCartons() {
+  //   this.dropDownService.getAllCartons()
+  //     .subscribe(
+  //       data => {
+  //         // console.log(data);
+  //         this.allCartons = data.cartons;
+  //       }, err => {
+  //         console.log(err)
+  //       }
+  //     )
+  // }
+  // //getAllPallets
+  // getAllPallets() {
+  //   this.dropDownService.getAllPallets()
+  //     .subscribe(
+  //       data => {
+  //         // console.log(data);
+  //         this.allPallets = data.pallets;
+  //       }, err => {
+  //         console.log(err)
+  //       }
+  //     )
+  // }
   //getAlldeliverby
   // getAllDeliverBys() {
   //   this.dropDownService.getAllDeliverBys()
@@ -1175,9 +1175,9 @@ export class AddNewPackageComponent implements OnInit {
     this.getAllDescriptions();
     this.getAllCoatedSides();
     this.getAllPrimaryPackings();
-    this.getAllCartons();
-    // this.getAllDeliverBys();
-    this.getAllPallets();
+    // this.getAllCartons();
+    // // this.getAllDeliverBys();
+    // this.getAllPallets();
     this.setPunchAndThread();
 
   }

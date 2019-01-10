@@ -467,6 +467,8 @@ var primaryPackingData = [
     { type: 'none', price: 0 },
     { type: 'poly bag', price: 0.01 },
     { type: 'paper wrap', price: 0.01 },
+    { type: 'carton', price: 0.01 },
+    { type: 'pallet', price: 0.01 },
 ]
 var cartonData = [
     { value: true, price: 0.25 },
@@ -708,35 +710,35 @@ function seedDB() {
         })
     });
 
-    seedSchema.Carton.remove({}, function (error) {
-        if (error) {
-            console.log(error)
-        }
-        cartonData.forEach((seed) => {
-            seedSchema.Carton.create(seed, (err, created) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    console.log(created);
-                }
-            })
-        })
-    });
+    // seedSchema.Carton.remove({}, function (error) {
+    //     if (error) {
+    //         console.log(error)
+    //     }
+    //     cartonData.forEach((seed) => {
+    //         seedSchema.Carton.create(seed, (err, created) => {
+    //             if (err) {
+    //                 console.log(err)
+    //             } else {
+    //                 console.log(created);
+    //             }
+    //         })
+    //     })
+    // });
 
-    seedSchema.Pallet.remove({}, function (error) {
-        if (error) {
-            console.log(error)
-        }
-        palletData.forEach((seed) => {
-            seedSchema.Pallet.create(seed, (err, created) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    console.log(created);
-                }
-            })
-        })
-    });
+    // seedSchema.Pallet.remove({}, function (error) {
+    //     if (error) {
+    //         console.log(error)
+    //     }
+    //     palletData.forEach((seed) => {
+    //         seedSchema.Pallet.create(seed, (err, created) => {
+    //             if (err) {
+    //                 console.log(err)
+    //             } else {
+    //                 console.log(created);
+    //             }
+    //         })
+    //     })
+    // });
     seedSchema.DeliverBy.remove({}, function (error) {
         if (error) {
             console.log(error)

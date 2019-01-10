@@ -102,16 +102,16 @@ var PrimaryPacking = mongoose.Schema({
     price: { type: Number }
 
 })
-var Carton = mongoose.Schema({
-    value: { type: String },
-    price: { type: Number }
+// var Carton = mongoose.Schema({
+//     value: { type: String },
+//     price: { type: Number }
 
-})
-var Pallet = mongoose.Schema({
-    value: { type: String },
-    price: { type: Number }
+// })
+// var Pallet = mongoose.Schema({
+//     value: { type: String },
+//     price: { type: Number }
 
-})
+// })
 var DeliverBy = mongoose.Schema({
     type: { type: String },
     price: { type: Number }
@@ -135,12 +135,13 @@ Perforation = mongoose.model('Perforation', Perforation);
 Description = mongoose.model('Description', Description);
 CoatedSides = mongoose.model('CoatedSides', CoatedSides);
 PrimaryPacking = mongoose.model('PrimaryPacking', PrimaryPacking);
-Carton = mongoose.model('Carton', Carton);
-Pallet = mongoose.model('Pallet', Pallet);
+// Carton = mongoose.model('Carton', Carton);
+//Pallet = mongoose.model('Pallet', Pallet);
 DeliverBy = mongoose.model('DeliverBy', DeliverBy);
 module.exports = {
     Machine, barCode, Coating, PackageFormat, Cut, SecondaryPrint, Thread,
     Pasting, SpecialRequirement, Folding,
     Perforation, Description, CoatedSides,
-    PrimaryPacking, Carton, Pallet, DeliverBy
+    PrimaryPacking, DeliverBy,
+    // Carton, Pallet,
 }
