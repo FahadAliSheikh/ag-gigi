@@ -1190,28 +1190,71 @@ function textileForNonStandardStock(
     machineMinWidth = printingMachine.min_size.width;
 
     // sheet data
-    var possibleSheetLength = (machineMaxLength - machineMinLength) - gripper;
-    var possibleSheetWidth = (machineMaxWidth - machineMinWidth) - runner;
+    var possibleSheetLength = (machineMaxLength - machineMinLength);
+    var possibleSheetWidth = (machineMaxWidth - machineMinWidth);
 
     //length 
     var sameDirection = True;
     var differentDirection = True;
     var pLength = productLength;
     var pWidth = productWidth;
+
     if (sameDirection) {
-        var lengthUps = (possibleSheetLength / pLength);
-        var lengthUpsFloor = Math.floor(lengthUps);
-        var lengthProductsWithOutTrim = lengthUpsFloor * pLength;
-        var trimOnLength = (lengthUpsFloor - 1) * trim;
-        var lengthProductsWithTrim = lengthProductsWithOutTrim + trimOnLength;
 
-        if (lengthProductsWithTrim <= len) {
-            lengthUps = lengthUps;
-        } else {
-            lengthUps -= lengthUps;
+        if (pLength <= len && pWidth <= wid) {
 
+
+            var sheetArea = (len + gripper) * (wid + runner);
+            var lengthUps = Math.floor((len / pLength));
+            var lengthProductsWithOutTrim = pLength * lengthUps;
+            var trimOnLength = (lengthUps - 1) * trim;
+            var lengthProductsWithTrim = lengthProductsWithOutTrim + trimOnLength;
+
+            if (lengthProductsWithTrim <= len) {
+                lengthUps = lengthUps;
+            }
+            else {
+                console.log('------------it is getting out of hand---------');
+
+                console.log('this is length now' + lengthProductsWithTrim);
+                while (lengthProductsWithTrim > len) {
+                    console.log('len ' + len);
+                    console.log('lengthProductsWithTrim ' + lengthProductsWithTrim);
+                    lengthUps = lengthUps - 1;
+                    trimOnLength = trimOnLength - trim;
+                    lengthProductsWithTrim = lengthProductsWithTrim - pLength;
+                    lengthProductsWithTrim = lengthProductsWithTrim - trim;
+                }
+            }
+            // console.log('------------------');
+            // console.log('len ' + len);
+            // console.log(' pLength' + pLength);
+            // console.log('lengthUps ' + lengthUps);
+            // console.log('lengthProductsWithOutTrim ' + lengthProductsWithOutTrim);
+            // console.log('trimOnLength ' + trimOnLength);
+            // console.log('lengthProductsWithTrim ' + lengthProductsWithTrim);
+            // console.log('------------------');
+
+            var widthUps = Math.floor((wid / pWidth));
+            var widthProductsWithOutTrim = widthUps * pWidth;
+            var trimOnWidth = (widthUps - 1) * trim;
+            var widthProductsWithTrim = widthProductsWithOutTrim + trimOnWidth;
+            if (widthProductsWithTrim <= wid) {
+                widthUps = widthUps;
+            } else {
+                console.log('------------it is getting out of hand---------');
+
+                console.log('this is length now' + widthProductsWithTrim);
+                while (widthProductsWithTrim > len) {
+                    console.log('len ' + len);
+                    console.log('lengthProductsWithTrim ' + widthProductsWithTrim);
+                    widthUps = widthUps - 1;
+                    trimOnWidth = trimOnWidth - trim;
+                    widthProductsWithTrim = widthProductsWithTrim - pLength;
+                    widthProductsWithTrim = widthProductsWithTrim - trim;
+                }
+            }
         }
-
     }
 
 }
