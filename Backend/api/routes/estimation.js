@@ -196,15 +196,15 @@ function flatSizeCosting(
             //     stockLength: 31,
             //     stockWidth: 43
             // }
-            ,
-            {
-                stockLength: 7.67,
-                stockWidth: 12
-            },
+            // ,
             // {
-            //     stockLength: 23,
-            //     stockWidth: 36
+            //     stockLength: 7.67,
+            //     stockWidth: 12
             // },
+            {
+                stockLength: 23,
+                stockWidth: 36
+            },
             // {
             //     stockLength: 22,
             //     stockWidth: 28
@@ -978,62 +978,51 @@ function cutStock(
     possibleSheetWidth = [];
     combinations = [];
 
-    console.log(lengthofStock);
-    console.log(widthofStock);
+
     if (machineMinLength <= lengthofStock && lengthofStock <= machineMaxWidth) {
-        console.log('condition is ture');
-        console.log(machineMinLength + '<' + lengthofStock + '<' + machineMaxWidth);
+
         possibleSheetLength.push({
             'length': lengthofStock,
             'lengthUps': 1
         });
     }
 
-    // if (machineMinLength <= widthofStock <= machineMaxWidth) {
-    //     possibleSheetWidth.push({
-    //         'width': widthofStock,
-    //         'widthUps': 1
-    //     });
-    // }
+    if (machineMinLength <= widthofStock && widthofStock <= machineMaxWidth) {
+        possibleSheetWidth.push({
+            'width': widthofStock,
+            'widthUps': 1
+        });
+    }
 
     var i = 2;
     var length = lengthofStock;
     var wid = widthofStock;
 
-    // while ((lengthofStock >= machineMinLength) || (widthofStock >= machineMinLength)) {
+    while ((lengthofStock >= machineMinLength) || (widthofStock >= machineMinLength)) {
 
-    //     if (lengthofStock >= machineMinLength) {
-    //         var len = length / i;
-    //         lengthofStock = len;
-    //         if (machineMinLength <= lengthofStock && lengthofStock <= machineMaxWidth) {
-    //             possibleSheetLength.push({
-    //                 'length': len,
-    //                 'lengthUps': i,
-    //             })
-    //         }
-    //     }
-    //     if (widthofStock >= machineMinLength) {
-    //         var width = wid / i;
-    //         widthofStock = width;
-    //         if (machineMinLength <= widthofStock && widthofStock <= machineMaxWidth) {
-    //             possibleSheetWidth.push({
-    //                 'width': width,
-    //                 'widthUps': i,
-    //             })
-    //         }
-    //     }
-    //     i++;
-    // }
-    console.log('========================');
-    console.log(machineMinLength);
-    console.log(machineMinWidth);
-    console.log(machineMaxLength);
-    console.log(machineMaxWidth);
+        if (lengthofStock >= machineMinLength) {
+            var len = length / i;
+            lengthofStock = len;
+            if (machineMinLength <= lengthofStock && lengthofStock <= machineMaxWidth) {
+                possibleSheetLength.push({
+                    'length': len,
+                    'lengthUps': i,
+                })
+            }
+        }
+        if (widthofStock >= machineMinLength) {
+            var width = wid / i;
+            widthofStock = width;
+            if (machineMinLength <= widthofStock && widthofStock <= machineMaxWidth) {
+                possibleSheetWidth.push({
+                    'width': width,
+                    'widthUps': i,
+                })
+            }
+        }
+        i++;
+    }
 
-    console.log(possibleSheetLength);
-    console.log(possibleSheetWidth);
-
-    console.log('========================');
 
     possibleSheetLength.forEach((length) => {
         possibleSheetWidth.forEach((width) => {
@@ -1058,7 +1047,7 @@ function cutStock(
             }
         })
     })
-    //  console.log(combinations);
+    console.log(combinations);
     return combinations;
 }
 

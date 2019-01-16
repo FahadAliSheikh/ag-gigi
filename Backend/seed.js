@@ -186,8 +186,8 @@ var machineData = [
             width: 20,
         },
         min_size: {
-            length: 10,
-            width: 7,
+            length: 7,
+            width: 10,
         },
         plate: {
             length: 570,
@@ -207,8 +207,8 @@ var machineData = [
             width: 20,
         },
         min_size: {
-            length: 10,
-            width: 7,
+            length: 7,
+            width: 10,
         },
         plate: {
             length: 570,
