@@ -176,7 +176,7 @@ var machineData = [
 
     },
     {
-        machine_name: 'Heidelberg kora',
+        machine_name: 'heidelberg kora',
         machine_type: 'printing',
         machine_man_name: '',
         no_of_colors: 1,
